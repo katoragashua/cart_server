@@ -2,7 +2,8 @@ defmodule CartServer do
   # Client API
   use GenServer
 
-  def start_link do
+  def start_link(_arg) do
+    IO.inspect("Starting CartServer...", label: "CartServer", pretty: true)
     GenServer.start_link(__MODULE__, %{cart: [], timer_ref: nil}, name: __MODULE__)
   end
 
