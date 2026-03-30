@@ -1,3 +1,3 @@
 defmodule Product do
-  defstruct [:name, :price, ]
+  defstruct [:id, :name, :price, :description, :quantity, :reorder_level, reorder_quantity: 0]
 end
