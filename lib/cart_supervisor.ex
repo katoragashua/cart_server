@@ -10,8 +10,8 @@ defmodule CartSupervisor do
     children = [
       # cartserver: {CartServer, []}
       # CartServer,
-      # ProductServer
-      {DynamicSupervisor, name: :dynamic_cart_supervisor}
+      # ProductsServer
+      {DynamicSupervisor, name: :dynamic_cart_supervisor, strategy: :one_for_one}
     ]
     Supervisor.init(children, strategy: :one_for_one)
   end
