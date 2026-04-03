@@ -2,7 +2,7 @@ defmodule ProductsServer do
   use GenServer
 
   # Client API
-  def start_link(_arg) do
+  def start_link(_initial_arg) do
     IO.inspect("Starting ProductsServer...", label: "ProductsServer", pretty: true)
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
