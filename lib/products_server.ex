@@ -19,7 +19,7 @@ defmodule ProductsServer do
     GenServer.call(__MODULE__, :get_products)
   end
 
-  def get_product(id) do
+  def get_product(id) when is_binary(id) do
     GenServer.call(__MODULE__, {:get_product, id})
   end
 
@@ -38,14 +38,17 @@ defmodule ProductsServer do
   @impl true
   def handle_call(:get_products, _from, state) do
     # Simulate a long-running operation
-    :timer.sleep(10_000)
-    {:reply, Map.values(state), state, 5_000}
+    # :timer.sleep(10_000)
+    {:reply, Map.values(state), state}
   end
 
   @impl true
   def handle_call({:get_product, id}, _from, state) do
     product = Map.get(state, id)
-    {:reply, product, state}
+case product do
+      nil -> {:reply, {:error, "Product not found"}, state}
+      _ -> {:reply, {:ok, product}, state}
+    end
   end
 
   # handle_cast clauses
